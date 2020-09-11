@@ -1,0 +1,107 @@
+<!doctype html>
+<!--
+Created using JS Bin
+http://bin.webduino.io
+
+Copyright (c) 2020 by anonymous (http://bin.webduino.io/tujeka/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Webduino Blockly Demo 05</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://bit.webduino.io/blockly/components/jquery/dist/jquery.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/dist/lib/webduino-all.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/dist/MessageTransport.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/dist/webduino-blockly.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/dist/lib/firebase.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/dist/lib/runtime.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://bit.webduino.io/blockly/components/webduino-bit-module-buzzer/BitBuzzer-blockly.js"></script>
+<style id="jsbin-css">
+.db5 {
+  font-size: 24px;
+  outline: none;
+  margin: 0 10px 10px 0;
+  pointer-events: auto!important;
+}
+
+button:hover {
+  box-shadow: 2px 2px 5px #888;
+}
+</style>
+</head>
+
+<body>
+  <div><button id="demo-area-05-btn1" class="btn">A</button>
+    <button id="demo-area-05-btn2" class="btn btn-primary">B</button>
+    <button id="demo-area-05-btn3" class="btn btn-success">C</button>
+    <button id="demo-area-05-btn4" class="btn btn-info">D</button>
+    <button id="demo-area-05-btn5" class="btn btn-warning">E</button>
+    <button id="demo-area-05-btn6" class="btn btn-dark">F</button>
+    <button id="demo-area-05-btn7" class="btn btn-danger">G</button></div>
+<script id="jsbin-javascript">
+var buzzer;
+
+function buzzer_music(m) {
+  var musicNotes = {};
+  musicNotes.notes = [];
+  musicNotes.tempos = [];
+  if (m[0].notes.length > 1) {
+    for (var i = 0; i < m.length; i++) {
+      if (Array.isArray(m[i].notes)) {
+        var cn = musicNotes.notes.concat(m[i].notes);
+        musicNotes.notes = cn;
+      } else {
+        musicNotes.notes.push(m[i].notes);
+      }
+      if (Array.isArray(m[i].tempos)) {
+        var ct = musicNotes.tempos.concat(m[i].tempos);
+        musicNotes.tempos = ct;
+      } else {
+        musicNotes.tempos.push(m[i].tempos);
+      }
+    }
+  } else {
+    musicNotes.notes = [m[0].notes];
+    musicNotes.tempos = [m[0].tempos];
+  }
+  return musicNotes;
+}
+
+
+boardReady({board: 'Bit', device: 'bitdb698', transport: 'mqtt'}, function (board) {
+  board.samplingInterval = 250;
+  buzzer = getBuzzer(board, '25');
+  document.getElementById("demo-area-05-btn1").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"C5",tempos:"5"}]).notes ,buzzer_music([  {notes:"C5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn2").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"D5",tempos:"5"}]).notes ,buzzer_music([  {notes:"D5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn3").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"E5",tempos:"5"}]).notes ,buzzer_music([  {notes:"E5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn4").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"F5",tempos:"5"}]).notes ,buzzer_music([  {notes:"F5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn5").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"G5",tempos:"5"}]).notes ,buzzer_music([  {notes:"G5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn6").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"A5",tempos:"5"}]).notes ,buzzer_music([  {notes:"A5",tempos:"5"}]).tempos );
+  });
+  document.getElementById("demo-area-05-btn7").addEventListener("click",function(){
+    buzzer.play(buzzer_music([  {notes:"B5",tempos:"5"}]).notes ,buzzer_music([  {notes:"B5",tempos:"5"}]).tempos );
+  });
+});
+
+</script>
+</body>
